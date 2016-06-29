@@ -1,0 +1,116 @@
+\documentclass[a4paper,12pt,oneside,onecolumn]{article} % Document type
+
+\usepackage[left=1.0in, right=1.0in, top=1.0in, bottom=1.0in]{geometry}
+
+\usepackage{fontspec}
+\setmainfont{cmr12}
+\usepackage{amsmath,amssymb}   % Contains mathematical symbols
+\usepackage{xltxtra}
+\defaultfontfeatures{Ligatures=TeX}
+\usepackage[english]{babel}    % Language
+\usepackage[square,numbers]{natbib}     %Nice numbered citations
+\bibliographystyle{plainnat}            %Sorted bibliography
+\usepackage{float}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{lscape}
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{subfigure}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage{rotating}
+\usepackage{lastpage}
+\usepackage{slantsc}
+\usepackage{lmodern}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Filotheou}
+\rhead{EL2520}
+\chead{DECOUPLING &
+GLOVER-MCFARLANE ROBUST
+LOOP-SHAPING}
+\rfoot{Page \thepage\ of \pageref{LastPage}}
+\cfoot{}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\title{
+	Computer Exercise 4\\
+	EL2520 Control Theory and Practice
+}
+\author{
+}
+
+\newcommand{\image}[3][width=1.0\columnwidth]{
+	\begin{figure}[h!]
+		\centering
+	    \includegraphics[#1]{#2}
+		\caption{#3}
+		\label{fig:#2}
+	\end{figure}
+}
+
+\newcommand{\imaget}[3][width=1.0\columnwidth]{
+	\begin{figure}[H]
+		\centering
+      \input{#2}
+		\caption{#3}
+		\label{fig:#2}
+	\end{figure}
+}
+
+\begin{document}
+	\maketitle
+
+	% Minimum phase case
+	\section*{Minimum phase case}
+
+	\subsection*{Dynamic decoupling}
+	The dynamic decoupling in exercise 3.2.1 is
+	\[
+		W(s)=
+    \begin{bmatrix}
+      1                             & -dfrac{0.01476}{s + 0.0213} \\
+      -dfrac{0.01336}{s + 0.02572}  & 1                           \\
+    \end{bmatrix}
+	\]
+
+	%\imaget{figures/bode_mp.tex}{Bode diagram of $\tilde{G}(s)$ derived in exercise 3.2.1}
+	%\imaget{figures/response_mp.tex}{Simulink plots from exercise 3.2.4}
+
+	Is the controller good?
+	\par\dotfill\par\dotfill\par
+	Are the output signals coupled?
+	\par\dotfill\par\dotfill
+
+	\subsection*{Glover-MacFarlane robust loop-shaping}
+
+	%\image{figure_3.pdf}{Simulink plots from exercise 3.3.4}
+
+	What are the similarities and differences compared to the nominal design?
+	\par\dotfill\par\dotfill
+
+	% Non-minimum phase case
+	\section*{Non-minimum phase case}
+
+	\subsection*{Dynamic decoupling}
+	The dynamic decoupling in exercise 3.2.1 is
+	\[
+		W(s) = \ldots
+	\]
+
+	%\imaget{figures/bode_nmp.tex}{Bode diagram of $\tilde{G}(s)$ derived in exercise 3.2.1}
+	%\imaget{figures/response_nmp.tex}{Simulink plots from exercise 3.2.4}
+
+	Is the controller good?
+	\par\dotfill\par\dotfill\par
+	Are the output signals coupled?
+	\par\dotfill\par\dotfill
+
+	\subsection*{Glover-MacFarlane robust loop-shaping}
+
+	%\image{figure_6.pdf}{Simulink plots from exercise 3.3.4}
+
+	What are the similarities and differences compared to the nominal design?
+	\par\dotfill\par\dotfill
+\end{document}

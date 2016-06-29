@@ -1,0 +1,151 @@
+
+\documentclass[a4paper,12pt,oneside,onecolumn]{article} % Document type
+
+\usepackage[left=1.0in, right=1.0in, top=1.0in, bottom=1.0in]{geometry}
+
+\usepackage{fontspec}
+\setmainfont{cmr17}
+\usepackage{amsmath,amssymb}   % Contains mathematical symbols
+\usepackage{xltxtra}
+\defaultfontfeatures{Ligatures=TeX}
+\usepackage[english]{babel}    % Language
+\usepackage[square,numbers]{natbib}     %Nice numbered citations
+\bibliographystyle{plainnat}            %Sorted bibliography
+\usepackage{float}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{lscape}
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{subfigure}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage{rotating}
+\usepackage{lastpage}
+\usepackage{slantsc}
+\usepackage{lmodern}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Filotheou}
+\rhead{EL2520}
+\chead{Decoupling \& robust loop-shaping}
+\rfoot{Page \thepage\ of \pageref{LastPage}}
+\cfoot{}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\title{
+	Computer Exercise 4\\
+	EL2520 Control Theory and Practice
+}
+\author{
+  Alexandros Filotheou \\
+  alefil@kth.se \\
+  871108-5590
+}
+
+\newcommand{\image}[3][width=1.0\columnwidth]{
+	\begin{figure}[h!]
+		\centering
+	    \includegraphics[#1]{#2}
+		\caption{#3}
+		\label{fig:#2}
+	\end{figure}
+}
+
+\newcommand{\imaget}[3][width=1.0\columnwidth]{
+	\begin{figure}[H]
+		\centering
+      \input{#2}
+		\caption{#3}
+		\label{fig:#2}
+	\end{figure}
+}
+
+\begin{document}
+	\maketitle
+
+	% Minimum phase case
+	\section*{Minimum phase case}
+
+	\subsection*{Dynamic decoupling}
+	The dynamic decoupling in exercise 3.2.1 is
+	\[
+		W(s)=
+    \begin{bmatrix}
+      1                             & -\dfrac{0.01476}{s + 0.0213} \\
+      -\dfrac{0.01336}{s + 0.02572}  & 1                           \\
+    \end{bmatrix}
+	\]
+
+	\imaget{figures/bode_mp.tex}{Bode diagram of $\tilde{G}(s)$ derived in exercise 3.2.1}
+	\imaget{figures/response_mp.tex}{Simulink plots from exercise 3.2.4}
+
+  In this case, inputs $u_1, u_2$ should be paired to outputs $y_1$ and $y_2$
+  respectively. Figure \ref{fig:figures/bode_mp.tex} shows that input $u_2$ is
+  severely attenuated with respect to output $y_1$; exactly the same happens
+  with respect to input $u_1$ and output $y_2$. The controller is thus
+  successful.
+
+  Figure \ref{fig:figures/response_mp.tex} exhibits the step responses of the
+  closed-loop system. It is evident that the output signal $y_2$, seen here with
+  red colour, is not in the least influenced by the preceding step input $u_1$.
+  Output $y_1$ exhibits the same behaviour with respect to the step input $u_2$.
+  The output signals are now decoupled.
+
+
+	\subsection*{Glover-MacFarlane robust loop-shaping}
+
+  \imaget{figures/response_mp_gmcf.tex}{Simulink plots from exercise 3.3.4}
+
+  Figure \ref{fig:figures/response_mp_gmcf.tex} illustrates the step responses
+  of the closed-loop system after shaping the open loop using the
+  Glover-McFarlane method. Both this and the nominal design method result in
+  successful decoupling, however the Glover-McFarlane method takes provision
+  towards robustness. In this case, comparing the latter method to the former,
+  we can see that it results in lower overshoot, but with the usual (although
+  small) increase in rise and settling times.
+
+  \newpage
+
+  %-----------------------------------------------------------------------------
+	% Non-minimum phase case
+	\section*{Non-minimum phase case}
+
+	\subsection*{Dynamic decoupling}
+	The dynamic decoupling in exercise 3.2.1 is
+	\[
+		W(s) =
+    \begin{bmatrix}
+      \dfrac{0.2}{s+0.2}  & \dfrac{-1.615 s - 0.1386}{s + 0.2}  \\\\
+      \dfrac{-1.143 s - 0.1039}{s+0.2}  & \dfrac{0.2}{s + 0.2}  \\
+    \end{bmatrix}
+	\]
+
+	\imaget{figures/bode_nmp.tex}{Bode diagram of $\tilde{G}(s)$ derived in exercise 3.2.1}
+	\imaget{figures/response_nmp.tex}{Simulink plots from exercise 3.2.4}
+
+  In this case, inputs $u_1, u_2$ should be paired to outputs $y_2$ and $y_1$
+  respectively. Figure \ref{fig:figures/bode_nmp.tex} shows that input $u_2$ is
+  severely attenuated with respect to output $y_2$; exactly the same happens with
+  respect to input $u_2$ and output $y_1$. The controller is thus successful.
+
+  Figure \ref{fig:figures/response_nmp.tex} exhibits the step responses of the
+  closed-loop system. It is evident that the output signal $y_2$, seen here with
+  red colour, is not in the least influenced by the preceding step input $u_2$.
+  Output $y_2$ exhibits the same behaviour with respect to the step input $u_1$.
+  The output signals are now decoupled.
+
+
+	\subsection*{Glover-MacFarlane robust loop-shaping}
+
+  \imaget{figures/response_nmp_gmcf.tex}{Simulink plots from exercise 3.3.4}
+
+  Figure \ref{fig:figures/response_nmp_gmcf.tex} illustrates the step responses
+  of the closed-loop system after shaping the open loop using the Glover-McFarlane
+  method. Both this and the nominal design method result in successful decoupling,
+  however the Glover-McFarlane method takes provision towards robustness. In
+  this case, comparing the latter method to the former, we can see that it
+  results in no overshoot at all, but with a somewhat major increase in rise
+  and settling times.
+
+\end{document}
